@@ -1,35 +1,52 @@
+/* Admin Products Page - Premium Luxury Style */
+
 .container {
-    padding: 40px;
+    padding: 50px;
+    background: #f8f6f3;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .header h1 {
-    font-size: 28px;
-    margin-bottom: 5px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #0a0a0a;
+    letter-spacing: 1px;
+    margin-bottom: 0;
 }
 
 .addBtn {
-    background: #000;
+    background: #0a0a0a;
     color: #fff;
-    padding: 12px 25px;
+    padding: 16px 32px;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.addBtn:hover {
+    background: #c9a962;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201, 169, 98, 0.3);
 }
 
 /* Table */
 .tableWrapper {
     background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .table {
@@ -39,32 +56,39 @@
 
 .table th {
     text-align: left;
-    padding: 15px 20px;
+    padding: 18px 24px;
     background: #fafafa;
-    font-size: 12px;
+    font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
-    color: #666;
-    border-bottom: 1px solid #eee;
+    letter-spacing: 1px;
+    color: #8a8a8a;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .table td {
-    padding: 15px 20px;
-    border-bottom: 1px solid #f9f9f9;
-    font-size: 14px;
+    padding: 18px 24px;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.table tr:hover td {
+    background: rgba(201, 169, 98, 0.03);
 }
 
 .productCell {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
 }
 
 .productCell img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    background: #fdfdfd;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    background: #f8f6f3;
+    border-radius: 8px;
 }
 
 .deleteBtn {
@@ -73,66 +97,90 @@
 
 .actions {
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 .actions button {
     background: none;
     border: none;
-    font-size: 13px;
+    font-size: 0.8rem;
     cursor: pointer;
-    color: #007bff;
+    color: #c9a962;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.actions button:hover {
+    color: #a68b4b;
+}
+
+.actions button.deleteBtn:hover {
+    color: #b02a37;
 }
 
 /* Form Styles */
 .form {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .mainGrid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
+    gap: 50px;
 }
 
 .field {
-    margin-bottom: 25px;
+    margin-bottom: 28px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .field label {
-    font-size: 13px;
+    font-size: 0.7rem;
     font-weight: 600;
-    color: #333;
+    letter-spacing: 2px;
+    color: #0a0a0a;
+    text-transform: uppercase;
 }
 
 .field input,
 .field textarea,
 .field select {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 16px 18px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+    outline: none;
+    border-color: #c9a962;
+    box-shadow: 0 0 0 4px rgba(201, 169, 98, 0.1);
 }
 
 .priceGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
 }
 
 .imageGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 16px;
 }
 
 .imageThumb {
     position: relative;
     aspect-ratio: 1;
-    border: 1px solid #eee;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .imageThumb img {
@@ -143,59 +191,94 @@
 
 .imageThumb button {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -6px;
+    right: -6px;
     background: #dc3545;
     color: #fff;
     border: none;
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    font-size: 10px;
+    font-size: 11px;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.imageThumb button:hover {
+    transform: scale(1.1);
 }
 
 .addImgBtn {
     aspect-ratio: 1;
     background: #fafafa;
-    border: 1px dashed #ccc;
-    font-size: 24px;
-    color: #999;
+    border: 2px dashed #e5e5e5;
+    border-radius: 8px;
+    font-size: 2rem;
+    color: #ccc;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addImgBtn:hover {
+    border-color: #c9a962;
+    color: #c9a962;
+    background: rgba(201, 169, 98, 0.05);
 }
 
 .checkboxes {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 18px;
+    margin-top: 24px;
 }
 
 .checkboxes label {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 14px;
-}
-
-.saveBtn {
-    background: #000;
-    color: #fff;
-    padding: 15px 40px;
-    border: none;
-    font-weight: 600;
-    letter-spacing: 1px;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #333;
     cursor: pointer;
 }
 
+.checkboxes input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #c9a962;
+}
+
+.saveBtn {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 18px 50px;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.saveBtn:hover {
+    background: #c9a962;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+}
+
 .help {
-    font-size: 12px;
-    color: #999;
-    margin-top: 5px;
+    font-size: 0.75rem;
+    color: #8a8a8a;
+    margin-top: 6px;
 }
 
 @media (max-width: 968px) {
     .mainGrid {
         grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 30px 20px;
     }
 }

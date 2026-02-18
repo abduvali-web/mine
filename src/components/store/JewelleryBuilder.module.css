@@ -1,0 +1,164 @@
+/* Builder Component Styles */
+
+.builderContainer {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.builderHeader {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.builderTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.stepIndicator {
+    display: flex;
+    gap: 10px;
+}
+
+.stepDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.stepDot.active {
+    background: #c9a962;
+    transform: scale(1.2);
+}
+
+.builderContent {
+    padding: 40px;
+    min-height: 400px;
+}
+
+.sectionTitle {
+    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Base Selection */
+.selectionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.optionCard {
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.optionCard:hover {
+    border-color: #c9a962;
+    transform: translateY(-5px);
+}
+
+.optionCard.selected {
+    border-color: #c9a962;
+    background: rgba(201, 169, 98, 0.05);
+}
+
+.optionImage {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.optionName {
+    font-weight: 600;
+    display: block;
+}
+
+/* Inputs */
+.inputGroup {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.textInput {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Upload */
+.uploadZone {
+    border: 2px dashed #c9a962;
+    padding: 40px;
+    text-align: center;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #fafafa;
+    transition: all 0.3s;
+}
+
+.uploadZone:hover {
+    background: rgba(201, 169, 98, 0.1);
+}
+
+.uploadPreview {
+    max-width: 200px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Actions */
+.builderActions {
+    padding: 20px 40px;
+    background: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: none;
+}
+
+.backBtn {
+    background: #e5e5e5;
+    color: #333;
+}
+
+.nextBtn {
+    background: #0a0a0a;
+    color: #fff;
+}
+
+.nextBtn:hover {
+    background: #c9a962;
+}
+
+.finishBtn {
+    background: #22c55e;
+    color: #fff;
+}

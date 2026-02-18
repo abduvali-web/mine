@@ -1,61 +1,170 @@
+/* Static Pages - Premium Luxury Style */
+
 .main {
-    min-height: 60vh;
-    padding: 40px 0 80px;
+    min-height: 70vh;
+    padding: 80px 0 120px;
+    background: var(--color-white);
 }
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 .title {
-    font-size: 36px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 0 0 40px;
+    font-family: var(--font-playfair), 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--color-black);
+    margin: 0 0 60px;
     text-align: center;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--color-gold);
+    margin: 24px auto 0;
 }
 
 .content {
-    line-height: 1.8;
-    color: #444;
+    line-height: 2;
+    color: var(--color-grey);
+    font-size: 1rem;
 }
 
 .content h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 40px 0 20px;
+    font-family: var(--font-playfair), 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--color-black);
+    margin: 60px 0 24px;
+    letter-spacing: 1px;
 }
 
 .content h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin: 30px 0 12px;
+    font-family: var(--font-playfair), 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-black);
+    margin: 40px 0 16px;
 }
 
 .content p {
-    margin: 0 0 20px;
-    font-size: 15px;
+    margin: 0 0 24px;
 }
 
 .content ul,
 .content ol {
-    margin: 0 0 20px;
-    padding-left: 24px;
+    margin: 0 0 24px;
+    padding-left: 28px;
 }
 
 .content li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.content li::marker {
+    color: var(--color-gold);
 }
 
 .content a {
-    color: #ffd700;
-    text-decoration: underline;
+    color: var(--color-gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-gold);
+    transition: all var(--transition-fast);
 }
 
 .content a:hover {
-    color: #e6c200;
+    color: var(--color-gold-dark);
+    border-color: var(--color-gold-dark);
+}
+
+/* Contact Form */
+.contactForm {
+    max-width: 600px;
+    margin: 60px auto 0;
+    padding: 50px;
+    background: var(--color-cream);
+    border-radius: 16px;
+}
+
+.contactForm .field {
+    margin-bottom: 24px;
+}
+
+.contactForm label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--color-black);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.contactForm input,
+.contactForm textarea {
+    width: 100%;
+    padding: 16px 18px;
+    border: 1px solid var(--color-grey-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all var(--transition-fast);
+    background: var(--color-white);
+}
+
+.contactForm input:focus,
+.contactForm textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 4px rgba(201, 169, 98, 0.1);
+}
+
+.contactForm textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.contactForm button {
+    width: 100%;
+    padding: 18px;
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.contactForm button:hover {
+    background: var(--color-gold);
+    color: var(--color-black);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 24px;
+    }
+
+    .contactForm {
+        padding: 30px 24px;
+    }
+
+    .main {
+        padding: 60px 0 100px;
+    }
 }

@@ -1,0 +1,760 @@
+/* Interactive Jewelry Builder - Premium Experience */
+
+.builderPage {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f8f6f3 0%, #fff 50%, #f8f6f3 100%);
+}
+
+.builderContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Progress Steps */
+.progressBar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.progressStep {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stepNumber {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f0f0f0;
+    color: #8a8a8a;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.stepNumber.active {
+    background: linear-gradient(135deg, #c9a962 0%, #a68b4b 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(201, 169, 98, 0.4);
+}
+
+.stepNumber.completed {
+    background: #22c55e;
+    color: #fff;
+}
+
+.stepLabel {
+    font-size: 0.85rem;
+    color: #8a8a8a;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .stepLabel {
+        display: block;
+    }
+}
+
+.stepDivider {
+    width: 40px;
+    height: 2px;
+    background: #e5e5e5;
+    margin: 0 8px;
+}
+
+.stepDivider.active {
+    background: #c9a962;
+}
+
+/* Main Layout */
+.builderLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+@media (min-width: 1024px) {
+    .builderLayout {
+        grid-template-columns: 1fr 420px;
+    }
+}
+
+/* Preview Panel */
+.previewPanel {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 100px;
+}
+
+.previewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.previewTitle {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    color: #0a0a0a;
+    margin: 0;
+}
+
+.sideToggle {
+    display: flex;
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.sideToggle button {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sideToggle button.active {
+    background: #fff;
+    color: #0a0a0a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.previewCanvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.previewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+}
+
+.charmSlot {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    border: 2px dashed rgba(201, 169, 98, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.charmSlot:hover {
+    border-color: #c9a962;
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 4px 15px rgba(201, 169, 98, 0.3);
+}
+
+.charmSlot.filled {
+    border: none;
+    background: transparent;
+}
+
+.charmSlot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.slotNumber {
+    font-size: 0.7rem;
+    color: #c9a962;
+    font-weight: 600;
+}
+
+/* Selection Panel */
+.selectionPanel {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+}
+
+.sectionTitle {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    color: #0a0a0a;
+    margin: 0 0 8px;
+}
+
+.sectionSubtitle {
+    color: #8a8a8a;
+    font-size: 0.9rem;
+    margin: 0 0 24px;
+}
+
+/* Chain Selection */
+.chainGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.chainCard {
+    background: #f8f6f3;
+    border-radius: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+.chainCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.chainCard.selected {
+    border-color: #c9a962;
+    background: rgba(201, 169, 98, 0.05);
+}
+
+.chainImage {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.chainName {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #0a0a0a;
+    margin: 0 0 4px;
+}
+
+.chainMeta {
+    font-size: 0.75rem;
+    color: #8a8a8a;
+    margin: 0;
+}
+
+.chainPrice {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #c9a962;
+    margin: 8px 0 0;
+}
+
+/* Charm Selection */
+.charmCategories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+}
+
+.charmCategories::-webkit-scrollbar {
+    display: none;
+}
+
+.categoryBtn {
+    padding: 8px 16px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.categoryBtn:hover {
+    border-color: #c9a962;
+}
+
+.categoryBtn.active {
+    background: #c9a962;
+    border-color: #c9a962;
+    color: #fff;
+}
+
+.charmGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.charmCard {
+    background: #f8f6f3;
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+.charmCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.charmCard.selected {
+    border-color: #c9a962;
+    background: rgba(201, 169, 98, 0.08);
+}
+
+.charmImage {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin: 0 auto 8px;
+}
+
+.charmName {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #0a0a0a;
+    margin: 0;
+}
+
+.charmPrice {
+    font-size: 0.7rem;
+    color: #c9a962;
+    margin: 4px 0 0;
+}
+
+/* Slot Selection for Charm */
+.slotSelector {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slotSelectorContent {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.slotSelectorContent h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    margin: 0 0 8px;
+}
+
+.slotSelectorContent p {
+    color: #8a8a8a;
+    margin: 0 0 24px;
+}
+
+.slotGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.slotOption {
+    padding: 16px;
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slotOption:hover {
+    border-color: #c9a962;
+}
+
+.slotOption.filled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.slotOption.filled:hover {
+    border-color: #e5e5e5;
+}
+
+.cancelBtn {
+    padding: 12px 32px;
+    border: 1px solid #e5e5e5;
+    background: transparent;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Tags Input */
+.tagsSection {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.tagsInput {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    min-height: 50px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(201, 169, 98, 0.1);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #a68b4b;
+}
+
+.tag button {
+    background: none;
+    border: none;
+    color: #a68b4b;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.tagsInput input {
+    flex: 1;
+    min-width: 100px;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    background: transparent;
+}
+
+/* Price Summary */
+.priceSummary {
+    background: #f8f6f3;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 24px;
+}
+
+.priceRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.priceRow.total {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 12px;
+    padding-top: 16px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0a0a0a;
+}
+
+/* Actions */
+.builderActions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.actionBtn {
+    flex: 1;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.saveBtn {
+    background: transparent;
+    border: 1px solid #c9a962;
+    color: #c9a962;
+}
+
+.saveBtn:hover {
+    background: rgba(201, 169, 98, 0.1);
+}
+
+.shareBtn {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border: none;
+    color: #fff;
+}
+
+.shareBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+}
+
+.addToCartBtn {
+    background: linear-gradient(135deg, #c9a962 0%, #a68b4b 100%);
+    border: none;
+    color: #fff;
+}
+
+.addToCartBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.35);
+}
+
+.addToCartBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Share Modal */
+.shareModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.shareModalContent {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.shareModalContent h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    margin: 0 0 24px;
+    text-align: center;
+}
+
+.shareLinkBox {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.shareLinkBox input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.copyBtn {
+    padding: 14px 24px;
+    background: #c9a962;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.shareOptions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.shareOption {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.shareOption:hover {
+    transform: scale(1.1);
+}
+
+.shareOption.whatsapp {
+    background: #25D366;
+    color: #fff;
+}
+
+.shareOption.twitter {
+    background: #1DA1F2;
+    color: #fff;
+}
+
+.shareOption.facebook {
+    background: #1877F2;
+    color: #fff;
+}
+
+/* Placed Charms List */
+.placedCharms {
+    margin-top: 24px;
+}
+
+.placedCharmItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f8f6f3;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.placedCharmItem img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.placedCharmInfo {
+    flex: 1;
+}
+
+.placedCharmInfo h4 {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.placedCharmInfo p {
+    font-size: 0.75rem;
+    color: #8a8a8a;
+    margin: 2px 0 0;
+}
+
+.removeCharmBtn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 4px;
+}
+
+/* Empty State */
+.emptySlots {
+    text-align: center;
+    padding: 40px;
+    color: #8a8a8a;
+}
+
+.emptySlots span {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+/* Navigation Buttons */
+.navButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.navBtn {
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prevBtn {
+    background: transparent;
+    border: 1px solid #e5e5e5;
+    color: #666;
+}
+
+.prevBtn:hover {
+    border-color: #c9a962;
+    color: #c9a962;
+}
+
+.nextBtn {
+    background: linear-gradient(135deg, #c9a962 0%, #a68b4b 100%);
+    border: none;
+    color: #fff;
+}
+
+.nextBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.35);
+}
+
+.nextBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}

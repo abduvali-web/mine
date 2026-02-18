@@ -32,20 +32,36 @@ export default function ProductCard({ name, slug, price, compareAt, images, cate
             onMouseLeave={() => setHovered(false)}
         >
             <div className={styles.imageWrapper}>
-                <div
-                    className={`${styles.image} ${hovered ? styles.hidden : ''}`}
-                    style={{ backgroundImage: `url(${mainImage})` }}
-                />
-                <div
-                    className={`${styles.image} ${styles.hoverImage} ${hovered ? styles.visible : ''}`}
-                    style={{ backgroundImage: `url(${secondImage})` }}
-                />
+                <div className={styles.imageContainer}>
+                    <div
+                        className={`${styles.image} ${hovered ? styles.hidden : ''}`}
+                        style={{ backgroundImage: `url(${mainImage})` }}
+                    />
+                    <div
+                        className={`${styles.image} ${styles.hoverImage} ${hovered ? styles.visible : ''}`}
+                        style={{ backgroundImage: `url(${secondImage})` }}
+                    />
+                </div>
+
+                {/* Shimmer overlay */}
+                <div className={`${styles.shimmer} ${hovered ? styles.shimmerActive : ''}`} />
+
+                {/* Badges */}
                 {hasDiscount && (
-                    <span className={styles.sale}>SALE</span>
+                    <span className={styles.badge}>SALE</span>
                 )}
+
+                {/* Quick View Overlay */}
+                <div className={`${styles.overlay} ${hovered ? styles.overlayVisible : ''}`}>
+                    <span className={styles.quickView}>QUICK VIEW</span>
+                </div>
             </div>
+
             <div className={styles.info}>
-                <h3 className={styles.name}>{name.toUpperCase()}</h3>
+                {category && (
+                    <span className={styles.category}>{category.name}</span>
+                )}
+                <h3 className={styles.name}>{name}</h3>
                 <div className={styles.prices}>
                     <span className={styles.price}>{price.toLocaleString()} SOM</span>
                     {hasDiscount && (
@@ -53,6 +69,9 @@ export default function ProductCard({ name, slug, price, compareAt, images, cate
                     )}
                 </div>
             </div>
+
+            {/* 3D Glow Effect */}
+            <div className={`${styles.glow} ${hovered ? styles.glowActive : ''}`} />
         </Link>
     )
 }

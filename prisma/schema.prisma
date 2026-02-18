@@ -3,9 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// =============================================
+// AUTHENTICATION & USERS
+// =============================================
 
 model Admin {
   id        String   @id @default(cuid())
@@ -16,13 +20,33 @@ model Admin {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  name      String?
-  createdAt DateTime @default(now())
-  orders    Order[]
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  username      String?   @unique
+  avatar        String?
+  bio           String?
+  createdAt     DateTime  @default(now())
+  orders        Order[]
+  
+  // Custom Designs
+  customDesigns CustomDesign[]
+  
+  // Discount Coins (Referral Rewards)
+  coinBalance   Float     @default(0)
+  coinHistory   CoinTransaction[]
+  
+  // Community Messenger
+  sentMessages      Message[]       @relation("SentMessages")
+  receivedMessages  Message[]       @relation("ReceivedMessages")
+  chatMemberships   ChatMember[]
+  ownedChats        Chat[]          @relation("ChatOwner")
 }
+
+// =============================================
+// E-COMMERCE - PRODUCTS & ORDERS
+// =============================================
 
 model Category {
   id        String    @id @default(cuid())
@@ -67,10 +91,200 @@ model Order {
   total         Float
   status        String   @default("pending")
   notes         String?
+  discountCoins Float    @default(0)
+  referralCode  String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   user          User?    @relation(fields: [userId], references: [id])
 }
+
+// =============================================
+// JEWELRY BUILDER SYSTEM
+// =============================================
+
+// Jewelry Types (Necklace, Bracelet, Ring, Earrings, etc.)
+model JewelryType {
+  id              String    @id @default(cuid())
+  name            String
+  slug            String    @unique
+  description     String?
+  image           String?
+  supportsCharms  Boolean   @default(true)
+  maxCharmSlots   Int       @default(12)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  jewelryItems    JewelryItem[]
+}
+
+// Individual Jewelry Items (e.g., "Gold Rope Chain 18in", "Silver Cable Bracelet")
+model JewelryItem {
+  id              String    @id @default(cuid())
+  name            String
+  slug            String    @unique
+  description     String?
+  price           Float
+  compareAt       Float?
+  image           String
+  material        String    @default("gold")  // gold, silver, rose-gold
+  length          String?   // 16in, 18in, 20in, etc.
+  typeId          String
+  type            JewelryType @relation(fields: [typeId], references: [id])
+  supportsCharms  Boolean   @default(true)
+  
+  // Charm positions defined as JSON: [{id: 1, x: 50, y: 120, side: 'front'}, ...]
+  charmPositions  String    @default("[]")
+  
+  inStock         Boolean   @default(true)
+  featured        Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  customDesigns   CustomDesign[]
+}
+
+// Charms that can be placed on jewelry
+model Charm {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  price       Float
+  image       String
+  category    String?   // zodiac, initials, symbols, nature, etc.
+  material    String    @default("gold")
+  inStock     Boolean   @default(true)
+  featured    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// User's Custom Designs
+model CustomDesign {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  jewelryItemId String
+  jewelryItem   JewelryItem @relation(fields: [jewelryItemId], references: [id])
+  
+  // Charm placements as JSON: [{positionId: 1, charmId: 'xxx', side: 'front'}, ...]
+  charmPlacements String  @default("[]")
+  
+  // Design metadata
+  name          String?
+  tags          String    @default("[]")  // JSON array of tags
+  description   String?
+  previewImage  String?   // Generated preview image
+  
+  // Sharing
+  shareCode     String    @unique
+  isPublic      Boolean   @default(false)
+  
+  // Pricing
+  totalPrice    Float
+  
+  // Stats
+  views         Int       @default(0)
+  likes         Int       @default(0)
+  purchases     Int       @default(0)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// =============================================
+// REFERRAL & DISCOUNT COINS
+// =============================================
+
+model CoinTransaction {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  amount      Float     // positive for earned, negative for spent
+  type        String    // 'referral_earn', 'purchase_spend', 'bonus'
+  description String
+  orderId     String?   // related order if applicable
+  designId    String?   // related design if referral
+  createdAt   DateTime  @default(now())
+}
+
+// =============================================
+// COMMUNITY MESSENGER (Telegram-like)
+// =============================================
+
+model Chat {
+  id          String    @id @default(cuid())
+  type        String    @default("direct")  // 'direct', 'group', 'channel'
+  name        String?   // For groups/channels
+  username    String?   @unique // @groupname for searchability
+  description String?
+  image       String?
+  
+  // Owner (for groups/channels)
+  ownerId     String?
+  owner       User?     @relation("ChatOwner", fields: [ownerId], references: [id])
+  
+  // Settings
+  isPublic    Boolean   @default(false)  // Can be found via search
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  members     ChatMember[]
+  messages    Message[]
+}
+
+model ChatMember {
+  id          String    @id @default(cuid())
+  chatId      String
+  chat        Chat      @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  
+  role        String    @default("member")  // 'owner', 'admin', 'member'
+  
+  // Notification settings
+  isMuted     Boolean   @default(false)
+  lastReadAt  DateTime  @default(now())
+  
+  joinedAt    DateTime  @default(now())
+  
+  @@unique([chatId, userId])
+}
+
+model Message {
+  id          String    @id @default(cuid())
+  chatId      String
+  chat        Chat      @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  
+  senderId    String
+  sender      User      @relation("SentMessages", fields: [senderId], references: [id])
+  
+  // For direct messages (optional, denormalized for query efficiency)
+  receiverId  String?
+  receiver    User?     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  
+  content     String
+  type        String    @default("text")  // 'text', 'image', 'design_share', 'system'
+  
+  // For design sharing
+  designId    String?
+  
+  // Message status
+  isEdited    Boolean   @default(false)
+  isDeleted   Boolean   @default(false)
+  
+  // Reply to
+  replyToId   String?
+  replyTo     Message?  @relation("MessageReplies", fields: [replyToId], references: [id])
+  replies     Message[] @relation("MessageReplies")
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// =============================================
+// SITE SETTINGS & PAGES
+// =============================================
 
 model Page {
   id        String   @id @default(cuid())
@@ -92,4 +306,7 @@ model Settings {
   heroTitle    String @default("SUN KISSED YOU")
   heroSubtitle String @default("18K Gold Plated Jewellery · High Quality & Affordable")
   footerText   String @default("© 2024 SUN KISSED YOU. All rights reserved.")
+  
+  // Referral settings
+  referralPercent Float @default(5.0)  // 5% discount coins for referrals
 }

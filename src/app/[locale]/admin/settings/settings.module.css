@@ -1,0 +1,101 @@
+/* Admin Settings Styles */
+
+.container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    max-width: 800px;
+}
+
+.header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin: 0 0 6px;
+    color: #0a0a0a;
+}
+
+.formSection {
+    margin-bottom: 40px;
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    color: #c9a962;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #c9a962;
+    box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.1);
+}
+
+.saveBtn {
+    background: #0a0a0a;
+    color: #fff;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.saveBtn:hover {
+    background: #c9a962;
+    transform: translateY(-2px);
+}
+
+.saveBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}

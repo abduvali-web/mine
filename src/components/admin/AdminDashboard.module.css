@@ -1,65 +1,99 @@
+/* Admin Dashboard - Premium Luxury Style */
+
 .layout {
     display: flex;
     min-height: 100vh;
-    background: #f8f9fa;
+    background: #f8f6f3;
 }
 
 .sidebar {
-    width: 260px;
-    background: #1a1a2e;
+    width: 280px;
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
     color: #fff;
-    padding: 30px 0;
+    padding: 40px 0;
     display: flex;
     flex-direction: column;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.1);
 }
 
 .sidebarHeader {
-    padding: 0 25px 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 20px;
+    padding: 0 30px 40px;
+    border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+    margin-bottom: 30px;
 }
 
 .sidebarHeader h2 {
-    font-size: 18px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
     letter-spacing: 2px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: 400;
 }
 
 .sidebarHeader span {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.65rem;
+    color: #c9a962;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-weight: 500;
 }
 
 .nav {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 .navItem {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px 25px;
-    color: rgba(255, 255, 255, 0.7);
+    gap: 16px;
+    padding: 16px 30px;
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    font-size: 14px;
-    transition: all 0.2s;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+.navItem::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #c9a962;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .navItem:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(201, 169, 98, 0.1);
     color: #fff;
 }
 
+.navItem:hover::before {
+    opacity: 1;
+}
+
+.navItem.active {
+    background: rgba(201, 169, 98, 0.15);
+    color: #c9a962;
+}
+
+.navItem.active::before {
+    opacity: 1;
+}
+
 .navIcon {
-    font-size: 18px;
+    font-size: 1.1rem;
 }
 
 .main {
     flex: 1;
-    padding: 40px;
+    padding: 50px;
     overflow-y: auto;
 }
 
@@ -67,75 +101,104 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .header h1 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #0a0a0a;
+    letter-spacing: 1px;
 }
 
 .viewSiteBtn {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    font-size: 13px;
+    background: transparent;
+    border: 1px solid #0a0a0a;
+    padding: 14px 28px;
+    font-size: 0.75rem;
     font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.viewSiteBtn:hover {
+    background: #0a0a0a;
+    color: #fff;
 }
 
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    margin-bottom: 40px;
+    gap: 30px;
+    margin-bottom: 50px;
 }
 
 .statCard {
     background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.statCard:hover {
+    border-color: #c9a962;
+    box-shadow: 0 8px 30px rgba(201, 169, 98, 0.1);
 }
 
 .statCard h3 {
-    font-size: 12px;
-    color: #888;
+    font-size: 0.7rem;
+    color: #c9a962;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    font-weight: 500;
 }
 
 .statValue {
-    font-size: 28px;
-    font-weight: 700;
-    color: #333;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #0a0a0a;
 }
 
 .recentOrders {
     background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    margin-bottom: 40px;
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .sectionHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .sectionHeader h2 {
-    font-size: 18px;
-    font-weight: 600;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #0a0a0a;
 }
 
 .sectionHeader a {
-    font-size: 13px;
-    color: #007bff;
+    font-size: 0.8rem;
+    color: #c9a962;
     text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.sectionHeader a:hover {
+    color: #a68b4b;
 }
 
 .tableWrapper {
@@ -149,68 +212,83 @@
 
 .table th {
     text-align: left;
-    padding: 15px;
-    font-size: 12px;
-    color: #999;
+    padding: 16px 20px;
+    font-size: 0.7rem;
+    color: #8a8a8a;
     text-transform: uppercase;
-    border-bottom: 1px solid #f0f0f0;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: 500;
 }
 
 .table td {
-    padding: 15px;
-    font-size: 14px;
-    border-bottom: 1px solid #f9f9f9;
+    padding: 18px 20px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #f5f5f5;
+    color: #333;
+}
+
+.table tr:hover td {
+    background: rgba(201, 169, 98, 0.03);
 }
 
 .status {
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .status.pending {
-    background: #fff3cd;
-    color: #856404;
+    background: rgba(201, 169, 98, 0.15);
+    color: #a68b4b;
 }
 
 .status.processing {
-    background: #cce5ff;
-    color: #004085;
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
 }
 
 .status.shipped {
-    background: #d4edda;
-    color: #155724;
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
 }
 
 .quickActions h2 {
-    font-size: 18px;
-    margin-bottom: 25px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    font-weight: 400;
 }
 
 .actionGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
 }
 
 .actionCard {
     background: #fff;
-    padding: 25px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 12px;
     text-decoration: none;
-    color: #333;
+    color: #0a0a0a;
     display: flex;
     align-items: center;
-    gap: 15px;
-    font-weight: 600;
-    transition: transform 0.2s;
+    gap: 16px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .actionCard:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
+    border-color: #c9a962;
+    box-shadow: 0 12px 40px rgba(201, 169, 98, 0.15);
 }
 
 .loading {
@@ -218,13 +296,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    color: #666;
+    font-size: 1rem;
+    color: #8a8a8a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 @media (max-width: 1200px) {
     .stats {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main {
+        padding: 30px;
     }
 }
 
@@ -235,5 +319,23 @@
 
     .sidebar {
         width: 100%;
+        padding: 20px 0;
+    }
+
+    .sidebarHeader {
+        padding: 0 20px 20px;
+        margin-bottom: 16px;
+    }
+
+    .navItem {
+        padding: 12px 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .main {
+        padding: 20px;
     }
 }

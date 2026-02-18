@@ -1,0 +1,165 @@
+/* Checkout - Premium Trustworthy Style */
+
+.main {
+    min-height: 100vh;
+    padding: 60px 0 100px;
+    background: #fcfcfc;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.title {
+    font-family: var(--font-playfair), serif;
+    font-size: 2.5rem;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Form Section */
+.formSection {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+    font-family: var(--font-playfair), serif;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    color: var(--color-black);
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-grey);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.1);
+}
+
+/* Order Summary */
+.summary {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 120px;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: var(--color-grey);
+    font-size: 0.95rem;
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.payBtn {
+    width: 100%;
+    padding: 18px;
+    background: var(--color-black);
+    color: #fff;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.payBtn:hover {
+    background: var(--color-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(201, 169, 98, 0.3);
+}
+
+.trustBadges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    opacity: 0.6;
+    font-size: 0.8rem;
+    color: var(--color-grey);
+}
+
+@media (max-width: 968px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .summary {
+        position: relative;
+        top: 0;
+    }
+}

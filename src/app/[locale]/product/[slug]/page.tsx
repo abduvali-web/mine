@@ -1,8 +1,10 @@
 import { prisma } from '@/lib/prisma'
 import { Link } from '@/navigation'
+import { notFound } from 'next/navigation'
 import Header from '@/components/store/Header'
 import Footer from '@/components/store/Footer'
 import AddToCartButton from '@/components/store/AddToCartButton'
+import ProductGallery from '@/components/store/ProductGallery'
 import styles from './product.module.css'
 
 export default async function ProductPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -13,7 +15,7 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
     })
 
     if (!product) {
-        return <div>Product not found</div>
+        notFound()
     }
 
     const images = JSON.parse(product.images || '[]') as string[]
@@ -22,50 +24,51 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
     return (
         <>
             <Header categories={categories} />
-            <main className={styles.container}>
-                {/* Breadcrumbs */}
-                <nav className={styles.breadcrumbs}>
-                    <Link href="/">Home</Link> /
-                    <Link href={`/shop/${product.category.slug}`}>{product.category.name}</Link> /
-                    <span>{product.name}</span>
-                </nav>
+            <div className={styles.main}>
+                <div className={styles.container}>
+                    {/* Breadcrumbs */}
+                    <nav className={styles.breadcrumb}>
+                        <Link href="/">Home</Link> /
+                        <Link href={`/shop/${product.category.slug}`}> {product.category.name}</Link> /
+                        <span> {product.name}</span>
+                    </nav>
 
-                <div className={styles.grid}>
-                    {/* Gallery */}
-                    <div className={styles.gallery}>
-                        {images.length > 0 ? images.map((img, i) => (
-                            <img key={i} src={img} alt={`${product.name} ${i + 1}`} className={styles.mainImage} />
-                        )) : (
-                            <img src="/placeholder.jpg" alt="Placeholder" className={styles.mainImage} />
-                        )}
-                    </div>
+                    <div className={styles.product}>
+                        {/* Gallery Component */}
+                        <ProductGallery images={images} />
 
-                    {/* Details */}
-                    <div className={styles.details}>
-                        <h1 className={styles.title}>{product.name}</h1>
-                        <p className={styles.price}>£{product.price.toFixed(2)}</p>
+                        {/* Product Info */}
+                        <div className={styles.info}>
+                            <span className={styles.category}>{product.category.name}</span>
+                            <h1 className={styles.name}>{product.name}</h1>
 
-                        <div className={styles.description}>
-                            <h3>Details</h3>
-                            <p>{product.description}</p>
-                        </div>
-
-                        <AddToCartButton product={product} />
-
-                        <div className={styles.extraInfo}>
-                            <div className={styles.infoItem}>
-                                <strong>✨ 18K Gold Plated</strong>
+                            <div className={styles.prices}>
+                                <span className={styles.price}>£{product.price.toFixed(2)}</span>
                             </div>
-                            <div className={styles.infoItem}>
-                                <strong>💧 Water Resistant</strong>
+
+                            <div className={styles.description}>
+                                {product.description}
                             </div>
-                            <div className={styles.infoItem}>
-                                <strong>🚫 Tarnish Free</strong>
+
+                            <AddToCartButton
+                                product={product}
+                                enablePersonalization={product.category.slug === 'personalised-jewellery'}
+                            />
+
+                            <div className={styles.details}>
+                                <h3>Product Details</h3>
+                                <ul>
+                                    <li>18K Gold Plated Stainless Steel</li>
+                                    <li>Water Resistant & Tarnish Free</li>
+                                    <li>Hypoallergenic & Nickel Free</li>
+                                    <li>2 Year Warranty Included</li>
+                                    <li>Luxury Gift Packaging</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
             <Footer />
         </>
     )

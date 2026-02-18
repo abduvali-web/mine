@@ -36,111 +36,100 @@ export default function AdminDashboard({ stats, recentOrders }: AdminDashboardPr
         return <div className={styles.loading}>Checking permissions...</div>
     }
 
-    const navItems = [
-        { label: 'Overview', icon: '📊', href: '/admin' },
-        { label: 'Products', icon: '📦', href: '/admin/products' },
-        { label: 'Categories', icon: '📁', href: '/admin/categories' },
-        { label: 'Orders', icon: '🛒', href: '/admin/orders' },
-        { label: 'Settings', icon: '⚙️', href: '/admin/settings' },
-    ]
-
     return (
-        <div className={styles.layout}>
-            <aside className={styles.sidebar}>
-                <div className={styles.sidebarHeader}>
-                    <h2>SUN KISSED YOU</h2>
-                    <span>Admin Panel</span>
+        <div>
+            <header className={styles.header}>
+                <h1>Welcome back, {session?.user?.name}</h1>
+                <p>Here's what's happening with your store today.</p>
+            </header>
+
+            <section className={styles.stats}>
+                <div className={styles.statCard}>
+                    <div className={styles.statIcon}>📦</div>
+                    <div className={styles.statInfo}>
+                        <span className={styles.statValue}>{stats.products}</span>
+                        <span className={styles.statLabel}>Total Products</span>
+                    </div>
                 </div>
-                <nav className={styles.nav}>
-                    {navItems.map((item) => (
-                        <Link key={item.label} href={item.href} className={styles.navItem}>
-                            <span className={styles.navIcon}>{item.icon}</span>
-                            {item.label}
-                        </Link>
-                    ))}
-                </nav>
-            </aside>
+                <div className={styles.statCard}>
+                    <div className={styles.statIcon}>🛒</div>
+                    <div className={styles.statInfo}>
+                        <span className={styles.statValue}>{stats.orders}</span>
+                        <span className={styles.statLabel}>Total Orders</span>
+                    </div>
+                </div>
+                <div className={styles.statCard}>
+                    <div className={styles.statIcon}>📁</div>
+                    <div className={styles.statInfo}>
+                        <span className={styles.statValue}>{stats.categories}</span>
+                        <span className={styles.statLabel}>Categories</span>
+                    </div>
+                </div>
+                <div className={styles.statCard}>
+                    <div className={styles.statIcon}>💰</div>
+                    <div className={styles.statInfo}>
+                        <span className={styles.statValue}>£{stats.revenue.toFixed(2)}</span>
+                        <span className={styles.statLabel}>Total Revenue</span>
+                    </div>
+                </div>
+            </section>
 
-            <main className={styles.main}>
-                <header className={styles.header}>
-                    <h1>Welcome back, {session?.user?.name}</h1>
-                    <button onClick={() => router.push('/')} className={styles.viewSiteBtn}>
-                        View Website
-                    </button>
-                </header>
-
-                <section className={styles.stats}>
-                    <div className={styles.statCard}>
-                        <h3>Total Products</h3>
-                        <p className={styles.statValue}>{stats.products}</p>
-                    </div>
-                    <div className={styles.statCard}>
-                        <h3>Total Orders</h3>
-                        <p className={styles.statValue}>{stats.orders}</p>
-                    </div>
-                    <div className={styles.statCard}>
-                        <h3>Categories</h3>
-                        <p className={styles.statValue}>{stats.categories}</p>
-                    </div>
-                    <div className={styles.statCard}>
-                        <h3>Total Revenue</h3>
-                        <p className={styles.statValue}>£{stats.revenue.toFixed(2)}</p>
-                    </div>
-                </section>
-
-                <section className={styles.recentOrders}>
-                    <div className={styles.sectionHeader}>
-                        <h2>Recent Orders</h2>
-                        <Link href="/admin/orders">View All</Link>
-                    </div>
-                    <div className={styles.tableWrapper}>
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
+            <section className={styles.recentOrders}>
+                <div className={styles.sectionHeader}>
+                    <h2>Recent Orders</h2>
+                    <Link href="/admin/orders">View All Orders →</Link>
+                </div>
+                <div className={styles.tableWrapper}>
+                    <table className={styles.table}>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {recentOrders.length > 0 ? recentOrders.map((order) => (
+                                <tr key={order.id}>
+                                    <td className={styles.orderId}>#{order.id.slice(-6).toUpperCase()}</td>
+                                    <td>{order.customerName}</td>
+                                    <td>£{order.total.toFixed(2)}</td>
+                                    <td>
+                                        <span className={`${styles.status} ${styles[order.status]}`}>
+                                            {order.status}
+                                        </span>
+                                    </td>
+                                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {recentOrders.length > 0 ? recentOrders.map((order) => (
-                                    <tr key={order.id}>
-                                        <td>#{order.id.slice(-6).toUpperCase()}</td>
-                                        <td>{order.customerName}</td>
-                                        <td>£{order.total.toFixed(2)}</td>
-                                        <td>
-                                            <span className={`${styles.status} ${styles[order.status]}`}>
-                                                {order.status}
-                                            </span>
-                                        </td>
-                                        <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                                    </tr>
-                                )) : (
-                                    <tr>
-                                        <td colSpan={5} className={styles.empty}>No orders found</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+                            )) : (
+                                <tr>
+                                    <td colSpan={5} className={styles.empty}>No orders found</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-                <section className={styles.quickActions}>
-                    <h2>Quick Actions</h2>
-                    <div className={styles.actionGrid}>
-                        <Link href="/admin/products/new" className={styles.actionCard}>
-                            <span>➕</span>
-                            Add New Product
-                        </Link>
-                        <Link href="/admin/categories" className={styles.actionCard}>
-                            <span>📂</span>
-                            Manage Categories
-                        </Link>
-                    </div>
-                </section>
-            </main>
+            <section className={styles.quickActions}>
+                <h2>Quick Actions</h2>
+                <div className={styles.actionGrid}>
+                    <Link href="/admin/products/new" className={styles.actionCard}>
+                        <span className={styles.actionIcon}>➕</span>
+                        Add New Product
+                    </Link>
+                    <Link href="/admin/categories" className={styles.actionCard}>
+                        <span className={styles.actionIcon}>📂</span>
+                        Manage Categories
+                    </Link>
+                    <Link href="/admin/orders" className={styles.actionCard}>
+                        <span className={styles.actionIcon}>📦</span>
+                        Manage Orders
+                    </Link>
+                </div>
+            </section>
         </div>
     )
 }

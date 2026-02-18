@@ -1,7 +1,9 @@
+/* Account Page - Premium Luxury Style */
+
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 80px 20px;
+    padding: 80px 40px;
     min-height: 80vh;
 }
 
@@ -10,30 +12,33 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 60px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-grey-light);
+    padding-bottom: 30px;
 }
 
 .header h1 {
-    font-size: 24px;
+    font-family: var(--font-playfair), 'Playfair Display', serif;
+    font-size: 2rem;
     font-weight: 400;
     letter-spacing: 4px;
+    color: var(--color-black);
 }
 
 .logoutBtn {
-    background: none;
-    border: 1px solid #000;
-    padding: 10px 25px;
-    font-size: 12px;
+    background: transparent;
+    border: 1px solid var(--color-black);
+    padding: 14px 32px;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all var(--transition-normal);
 }
 
 .logoutBtn:hover {
-    background: #000;
-    color: #fff;
+    background: var(--color-black);
+    color: var(--color-white);
 }
 
 .grid {
@@ -43,61 +48,110 @@
 }
 
 .card {
-    background: #fff;
-    border: 1px solid #f0f0f0;
-    padding: 30px;
+    background: var(--color-white);
+    border: 1px solid var(--color-grey-light);
+    padding: 40px;
     margin-top: 20px;
+    border-radius: 12px;
+    transition: all var(--transition-fast);
+}
+
+.card:hover {
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-sm);
 }
 
 .profile h2,
 .orders h2 {
-    font-size: 16px;
-    font-weight: 600;
+    font-family: var(--font-playfair), 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
     letter-spacing: 2px;
-    color: #333;
-    text-transform: uppercase;
+    color: var(--color-black);
+    margin-bottom: 8px;
 }
 
 .profile p {
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #666;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    color: var(--color-grey);
+    line-height: 1.6;
 }
 
 .adminLink {
     display: inline-block;
-    margin-top: 20px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #000;
-    text-decoration: underline;
+    margin-top: 24px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--color-gold);
+    transition: all var(--transition-fast);
+}
+
+.adminLink:hover {
+    color: var(--color-gold-dark);
+    border-color: var(--color-gold-dark);
 }
 
 .empty {
     text-align: center;
-    padding: 40px 0;
+    padding: 60px 20px;
 }
 
 .empty p {
-    color: #999;
-    font-size: 14px;
-    margin-bottom: 20px;
+    color: var(--color-grey);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
 }
 
 .shopNow {
-    display: inline-block;
-    padding: 12px 30px;
-    background: #000;
-    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    background: var(--color-black);
+    color: var(--color-white);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all var(--transition-normal);
+}
+
+.shopNow:hover {
+    background: var(--color-gold);
+    color: var(--color-black);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 60px 24px;
+    }
+
+    .grid {
+        gap: 40px;
+    }
 }
 
 @media (max-width: 768px) {
     .grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 1.6rem;
     }
 }

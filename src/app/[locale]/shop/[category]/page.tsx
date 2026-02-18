@@ -44,14 +44,19 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
 }
 
 export async function generateStaticParams() {
-    const locales = ['en', 'ru', 'uz'];
-    const categories = await prisma.category.findMany()
+    try {
+        const locales = ['en', 'ru', 'uz'];
+        const categories = await prisma.category.findMany()
 
-    const params = [];
-    for (const locale of locales) {
-        for (const category of categories) {
-            params.push({ locale, category: category.slug });
+        const params = [];
+        for (const locale of locales) {
+            for (const category of categories) {
+                params.push({ locale, category: category.slug });
+            }
         }
+        return params;
+    } catch (e) {
+        console.error('Error generating static params:', e);
+        return [];
     }
-    return params;
 }
